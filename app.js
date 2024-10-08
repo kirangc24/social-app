@@ -1,36 +1,32 @@
 const express = require('express');
+const mysql = require('mysql');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+
 const app = express();
-const path = require('path');
-const userRoutes = require('./routes/user');
+const port = 3000;
 
-// Middleware to serve static files from "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Middleware to parse form data
-app.use(express.urlencoded({ extended: true }));
-
-// Basic route for homepage
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// MySQL connection setup
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'Mrscool@155',
+    database: 'social_app'
 });
 
-// Route for login page
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+db.connect(err => {
+    if (err) throw err;
+    console.log('MySQL Connected...');
 });
 
-// Handle login form submission
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    if (username === 'admin' && password === 'password') {
-        res.send('<h1>Login successful!</h1>');
-    } else {
-        res.send('<h1>Login failed. Please try again.</h1>');
-    }
-});
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+// Routes
+app.use('/user', require('./routes/user'));
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
 });
