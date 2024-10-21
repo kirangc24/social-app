@@ -4,6 +4,10 @@ FROM node:18
 # Create and set the working directory inside the container
 WORKDIR /usr/src/app
 
+# In your Dockerfile
+COPY wait-for-it.sh /usr/local/bin/wait-for-it
+RUN chmod +x /usr/local/bin/wait-for-it
+
 # Copy package.json and install dependencies
 COPY package*.json ./
 RUN npm install
@@ -15,4 +19,5 @@ COPY . .
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["wait-for-it", "mysql:3306", "--", "node", "app.js"]
+
