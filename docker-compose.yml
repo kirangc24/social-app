@@ -19,7 +19,7 @@ services:
 
   db:
     image: mysql:latest
-    restart: always
+    
     environment:
       MYSQL_ROOT_PASSWORD: MySecureP@ss1
       MYSQL_DATABASE: social_app
