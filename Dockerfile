@@ -20,5 +20,5 @@ RUN chmod +x /usr/local/bin/wait-for-it
 EXPOSE 3000
 
 # Start the application
-CMD ["wait-for-it", "mysql:3306", "--", "node", "app.js"]
+CMD ["/usr/local/bin/wait-for-it", "mysql:3306", "--", "node", "app.js"]
 
