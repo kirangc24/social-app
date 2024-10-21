@@ -4,7 +4,7 @@ FROM node:18
 # Create and set the working directory inside the container
 WORKDIR /usr/src/app
 
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get update && apt-get install -y netcat-openbsd
 
 # Copy package.json and install dependencies
 COPY package*.json ./
