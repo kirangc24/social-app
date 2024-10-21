@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 
 const app = express();
