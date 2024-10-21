@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     environment:
-      - DB_HOST=db
+      - DB_HOST=mysql
       - DB_USER=root
       - DB_PASSWORD=MySecureP@ss1
       - DB_NAME=social_app
@@ -18,7 +18,7 @@ services:
       - my-network
 
   db:
-    image: mysql:5.7
+    image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: MySecureP@ss1
       MYSQL_DATABASE: social_app
