@@ -13,6 +13,7 @@ services:
       - DB_NAME=social_app
     volumes:
       - .:/usr/src/app
+      - /usr/src/app/node_modules
     networks:
       - my-network
 
